@@ -1,37 +1,48 @@
+using Scripts.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Scripts.UI
 {
     public class UiController : MonoBehaviour
     {
-        //[SerializeField] private Color _buttonsAndTextColor;
+        [SerializeField] private GameObject _mainSettingLayout;
+        [SerializeField] private GameObject _loadingLayout;
+        [SerializeField] private GameObject _levelLayout;
+        [SerializeField] private CanvasGroup _mainSettingsCanvasGroup;
+        [SerializeField] private CanvasGroup _loadingLayoutCanvasGroup;
         [SerializeField] private Button[] _buttons;
+        [SerializeField] private float _menuSlideSpeed = 5f;
+        [SerializeField] private float _fadeSpeed = 0.2f;
 
-        //[SerializeField] private Image[] _buttonImage;
-        //[SerializeField] private Text[] _buttonText;
-        [SerializeField] private float _menuSlideSpeed = 1f;
-
-        private Color _defaultButtonColor;
-        private CanvasScaler _canvas;
+        private Color _pressedButtonColor;
+        private CanvasScaler _canvasScaler;
         private float _canvasWidth;
         private float _canvasHeight;
         private GridLayoutGroup _grid;
         private Vector3 _defaultMenuPosition;
+        private AudioComponent _audio;
+
+        private bool _soundIsActive = true;
+        private bool _musicIsActive = true;
 
         private bool _showMenu;
         private bool _showSettings;
+        private bool _playIsPressed;
+        [SerializeField] private float _loadingDelay = 1f;
 
         private void Awake()
         {
+            _audio = FindObjectOfType<AudioComponent>();
             _defaultMenuPosition = transform.position;
             _grid = FindObjectOfType<GridLayoutGroup>();
-            _canvas = FindObjectOfType<Canvas>().GetComponent<CanvasScaler>();
-            _canvasWidth = _canvas.referenceResolution.x;
-            _canvasHeight = _canvas.referenceResolution.y;
+            _canvasScaler = FindObjectOfType<Canvas>().GetComponent<CanvasScaler>();
+            _canvasWidth = _canvasScaler.referenceResolution.x;
+            _canvasHeight = _canvasScaler.referenceResolution.y;
 
-            _defaultButtonColor = _buttons[0].transform.Find("Text").GetComponent<Text>().color;
+            _pressedButtonColor = _buttons[0].transform.Find("Text").GetComponent<Text>().color;
         }
 
         private void Start()
@@ -41,11 +52,10 @@ namespace Scripts.UI
 
         public void OnButtonPressed(int buttonIndex)
         {
-            _buttons[buttonIndex].GetComponent<Image>().color = _defaultButtonColor;
-            _buttons[buttonIndex].transform.Find("Text").GetComponent<Text>().color = Color.white;
+            _audio.Play("button");
 
-            //_buttonImage[buttonIndex].color = Color.green;
-            //_buttonText[buttonIndex].color = Color.white;
+            _buttons[buttonIndex].GetComponent<Image>().color = _pressedButtonColor;
+            _buttons[buttonIndex].transform.Find("Text").GetComponent<Text>().color = Color.white;
         }
 
         public void OnButtonReleased()
@@ -53,12 +63,45 @@ namespace Scripts.UI
             foreach (var button in _buttons)
             {
                 button.GetComponent<Image>().color = Color.white;
-                button.transform.Find("Text").GetComponent<Text>().color = _defaultButtonColor;
+                button.transform.Find("Text").GetComponent<Text>().color = _pressedButtonColor;
             }
-            //    buttonImage.color = _defaultButtonColor;
+        }
 
-            //foreach (var buttonText in _buttonText)
-            //    buttonText.color = _defaultButtonTextColor;
+        public void OnMusicPressed()
+        {
+            _audio.Play("button");
+
+            if (_musicIsActive)
+            {
+                _musicIsActive = false;
+                _audio.PauseMainSource();
+            }
+            else
+            {
+                _musicIsActive = true;
+                _audio.PlayMainSource();
+            }
+        }
+
+        public void OnSoundPressed()
+        {
+            if (_soundIsActive)
+            {
+                _soundIsActive = false;
+                _audio.SetSfxVolume(0f);
+            }
+            else
+            {
+                _soundIsActive = true;
+                _audio.SetSfxVolume(0.5f);
+                _audio.Play("button");
+            }
+        }
+
+        public void OnPlayPressed()
+        {
+            _loadingLayout.SetActive(true);
+            _playIsPressed = true;
         }
 
         public void ButtonsIsActive(bool state)
@@ -73,6 +116,26 @@ namespace Scripts.UI
 
         private void Update()
         {
+            if (_playIsPressed)
+            {
+                _mainSettingsCanvasGroup.alpha -= _fadeSpeed * Time.deltaTime;
+                _loadingLayoutCanvasGroup.alpha += _fadeSpeed * Time.deltaTime;
+
+                if (_mainSettingsCanvasGroup.alpha == 0)
+                {
+                    _mainSettingLayout.SetActive(false);
+                }
+
+                if (_loadingDelay > 0)
+                {
+                    _loadingDelay -= Time.deltaTime;
+                }
+                else
+                {
+                    SceneManager.LoadScene("LevelScene");
+                }
+            }
+
             if (_showSettings)
             {
                 if (gameObject.transform.position.x <= -_canvasWidth)
