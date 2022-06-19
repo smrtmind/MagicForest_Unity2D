@@ -132,7 +132,7 @@ namespace Scripts.UI
                 }
                 else
                 {
-                    SceneManager.LoadScene("LevelScene");
+                    SceneManager.LoadScene("EndlessLevel");
                 }
             }
 

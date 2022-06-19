@@ -1,29 +1,29 @@
-using Scripts.Player;
 using UnityEngine;
 
 namespace Scripts.Utils
 {
     public class LayerCheck : MonoBehaviour
     {
-        [SerializeField] private string _tag;
+        [SerializeField] private LayerMask _layer;
+        [SerializeField] private bool _isTouchingLayer;
 
-        private PlayerController _player;
+        private Collider2D _collider;
+
+        public bool IsTouchingLayer => _isTouchingLayer;
 
         private void Awake()
         {
-            _player = FindObjectOfType<PlayerController>();
+            _collider = GetComponent<Collider2D>();
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerStay2D(Collider2D collision)
         {
-            if (other.gameObject.tag == _tag)
-                _player.IsGrounded = true;
+            _isTouchingLayer = _collider.IsTouchingLayers(_layer);
         }
 
-        private void OnTriggerExit2D(Collider2D other)
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            if (other.gameObject.tag == _tag)
-                _player.IsGrounded = false;
+            _isTouchingLayer = _collider.IsTouchingLayers(_layer);
         }
     }
 }

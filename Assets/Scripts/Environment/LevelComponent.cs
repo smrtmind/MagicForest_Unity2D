@@ -1,5 +1,4 @@
 using Scripts.Player;
-using Scripts.Utils;
 using UnityEngine;
 
 namespace Scripts.Environment
@@ -8,27 +7,44 @@ namespace Scripts.Environment
     {
         [SerializeField] private GameObject[] _sections;
         [SerializeField] private float _sectionLong = 21f;
+        [SerializeField] private int _spawnSectionsOnStartEachSide;
+        [SerializeField] private bool _spawnRightSide;
+        [SerializeField] private bool _spawnLeftSide;
 
-        [Space]
-        [SerializeField] private int _spawnSectionsOnStart;
+        [Space(20f)]
+        [SerializeField] private GameObject _testSection;
 
-        private float _xPosition;
+        private float _xPositionRight;
+        private float _xPositionLeft;
         private PlayerController _playerController;
 
         private void Awake()
         {
-            _xPosition += _sectionLong;
+            Instantiate(_sections[GetRandomIndex()], new Vector3(0, 0, 0), Quaternion.identity);
 
-            for (int i = 0; i < _spawnSectionsOnStart; i++)
+            _xPositionRight += _sectionLong;
+            _xPositionLeft -= _sectionLong;
+
+            _testSection.SetActive(false);
+
+            for (int i = 0; i < _spawnSectionsOnStartEachSide; i++)
                 SpawnSection();
         }
 
         public void SpawnSection()
         {
-            var randomIndex = Random.Range(0, _sections.Length);
-
-            Instantiate(_sections[randomIndex], new Vector3(_xPosition, 0, 0), Quaternion.identity);
-            _xPosition += _sectionLong;
+            if (_spawnRightSide)
+            {
+                Instantiate(_sections[GetRandomIndex()], new Vector3(_xPositionRight, 0, 0), Quaternion.identity);
+                _xPositionRight += _sectionLong;
+            }
+            if (_spawnLeftSide)
+            {
+                Instantiate(_sections[GetRandomIndex()], new Vector3(_xPositionLeft, 0, 0), Quaternion.identity);
+                _xPositionLeft -= _sectionLong;
+            }
         }
+
+        private int GetRandomIndex() => Random.Range(0, _sections.Length);
     }
 }
