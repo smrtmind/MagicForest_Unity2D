@@ -15,6 +15,7 @@ namespace Scripts.Player
         private Rigidbody2D _playerBody;
         private Transform _transform;
         private GroundCheck _groundCheck;
+        private GameSession _session;
 
         private static readonly int Run = Animator.StringToHash("is-running");
         private static readonly int Jump = Animator.StringToHash("is-jumping");
@@ -25,12 +26,12 @@ namespace Scripts.Player
             _playerBody = GetComponent<Rigidbody2D>();
             _transform = GetComponent<Transform>();
             _groundCheck = GetComponent<GroundCheck>();
+            _session = FindObjectOfType<GameSession>();
         }
 
         private void Update()
         {
             _playerBody.velocity = new Vector2(horizontalMovement * _speed, _playerBody.velocity.y);
-            
 
             if (jump && _groundCheck.IsTouchingLayer)
                 _playerBody.velocity = new Vector2(_playerBody.velocity.x, _jumpForce);
@@ -60,6 +61,13 @@ namespace Scripts.Player
                 _animator.SetBool(Jump, true);
             else
                 _animator.SetBool(Jump, false);
+
+            if (_session.GameOver)
+            {
+                _animator.SetTrigger(Fall);
+                gameObject.GetComponent<PlayerInput>().enabled = false;
+                _playerBody.velocity = Vector2.zero;
+            }
         }
     }
 }
