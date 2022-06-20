@@ -8,9 +8,6 @@ namespace Scripts.UI
 {
     public class UiController : MonoBehaviour
     {
-        [SerializeField] private GameObject _mainSettingLayout;
-        [SerializeField] private GameObject _loadingLayout;
-        [SerializeField] private GameObject _levelLayout;
         [SerializeField] private CanvasGroup _mainSettingsCanvasGroup;
         [SerializeField] private CanvasGroup _loadingLayoutCanvasGroup;
         [SerializeField] private Button[] _buttons;
@@ -31,11 +28,15 @@ namespace Scripts.UI
         private bool _showMenu;
         private bool _showSettings;
         private bool _playIsPressed;
-        [SerializeField] private float _loadingDelay = 1f;
+        private float _loadingDelay = 3f;
 
         private void Awake()
         {
             _audio = FindObjectOfType<AudioComponent>();
+            _audio.SetMusicVolume(0.5f);
+            _audio.SetMusicTrack("intro");
+            _audio.SetSfxVolume(0.5f);
+
             _defaultMenuPosition = transform.position;
             _grid = FindObjectOfType<GridLayoutGroup>();
             _canvasScaler = FindObjectOfType<Canvas>().GetComponent<CanvasScaler>();
@@ -52,7 +53,7 @@ namespace Scripts.UI
 
         public void OnButtonPressed(int buttonIndex)
         {
-            _audio.Play("button");
+            _audio.PlaySfx("button");
 
             _buttons[buttonIndex].GetComponent<Image>().color = _pressedButtonColor;
             _buttons[buttonIndex].transform.Find("Text").GetComponent<Text>().color = Color.white;
@@ -69,17 +70,17 @@ namespace Scripts.UI
 
         public void OnMusicPressed()
         {
-            _audio.Play("button");
+            _audio.PlaySfx("button");
 
             if (_musicIsActive)
             {
                 _musicIsActive = false;
-                _audio.PauseMainSource();
+                _audio.StopMusic();
             }
             else
             {
                 _musicIsActive = true;
-                _audio.PlayMainSource();
+                _audio.PlayMusic();
             }
         }
 
@@ -94,13 +95,13 @@ namespace Scripts.UI
             {
                 _soundIsActive = true;
                 _audio.SetSfxVolume(0.5f);
-                _audio.Play("button");
+                _audio.PlaySfx("button");
             }
         }
 
         public void OnPlayPressed()
         {
-            _loadingLayout.SetActive(true);
+            _loadingLayoutCanvasGroup.gameObject.SetActive(true);
             _playIsPressed = true;
         }
 
@@ -114,6 +115,8 @@ namespace Scripts.UI
 
         public void ShowSettings() => _showSettings = true;
 
+        public void OnExit() => Application.Quit();
+
         private void Update()
         {
             if (_playIsPressed)
@@ -122,18 +125,12 @@ namespace Scripts.UI
                 _loadingLayoutCanvasGroup.alpha += _fadeSpeed * Time.deltaTime;
 
                 if (_mainSettingsCanvasGroup.alpha == 0)
-                {
-                    _mainSettingLayout.SetActive(false);
-                }
+                    _mainSettingsCanvasGroup.gameObject.SetActive(false);
 
                 if (_loadingDelay > 0)
-                {
                     _loadingDelay -= Time.deltaTime;
-                }
                 else
-                {
                     SceneManager.LoadScene("EndlessLevel");
-                }
             }
 
             if (_showSettings)

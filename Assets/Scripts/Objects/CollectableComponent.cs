@@ -38,7 +38,7 @@ namespace Scripts.Objects
         {
             if (other.gameObject.tag == "Player")
             {
-                _audio.Play("coin");
+                _audio.PlaySfx("coin");
                 _session.AddCoin(1);
 
                 Destroy(gameObject);

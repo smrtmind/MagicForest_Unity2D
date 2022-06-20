@@ -1,4 +1,5 @@
 using Scripts.Player;
+using System.Collections;
 using UnityEngine;
 
 namespace Scripts.Environment
@@ -7,42 +8,55 @@ namespace Scripts.Environment
     {
         [SerializeField] private GameObject[] _sections;
         [SerializeField] private float _sectionLong = 21f;
-        [SerializeField] private int _spawnSectionsOnStartEachSide;
-        [SerializeField] private bool _spawnRightSide;
-        [SerializeField] private bool _spawnLeftSide;
+        [SerializeField] private float _spawnDelay = 3f;
 
         [Space(20f)]
         [SerializeField] private GameObject _testSection;
 
         private float _xPositionRight;
         private float _xPositionLeft;
-        private PlayerController _playerController;
+        private PlayerController _player;
+        private bool _creatingSection = false;
 
         private void Awake()
         {
-            Instantiate(_sections[GetRandomIndex()], new Vector3(0, 0, 0), Quaternion.identity);
+            _player = FindObjectOfType<PlayerController>();
 
-            _xPositionRight += _sectionLong;
-            _xPositionLeft -= _sectionLong;
+            //spawn first section on start in the middle of the scene
+            Instantiate(_sections[GetRandomIndex()], Vector3.zero, Quaternion.identity);
 
             _testSection.SetActive(false);
-
-            for (int i = 0; i < _spawnSectionsOnStartEachSide; i++)
-                SpawnSection();
         }
 
-        public void SpawnSection()
+        private void Update()
         {
-            if (_spawnRightSide)
+            if (!_creatingSection)
             {
-                Instantiate(_sections[GetRandomIndex()], new Vector3(_xPositionRight, 0, 0), Quaternion.identity);
-                _xPositionRight += _sectionLong;
+                if (_player.horizontalMovement < 0f)
+                {
+                    _creatingSection = true;
+
+                    _xPositionLeft -= _sectionLong;
+                    StartCoroutine(SpawnSection(_xPositionLeft));
+                }
+
+                if (_player.horizontalMovement > 0f)
+                {
+                    _creatingSection = true;
+
+                    _xPositionRight += _sectionLong;
+                    StartCoroutine(SpawnSection(_xPositionRight));
+                }
             }
-            if (_spawnLeftSide)
-            {
-                Instantiate(_sections[GetRandomIndex()], new Vector3(_xPositionLeft, 0, 0), Quaternion.identity);
-                _xPositionLeft -= _sectionLong;
-            }
+        }
+
+        private IEnumerator SpawnSection(float positionX)
+        {
+            Instantiate(_sections[GetRandomIndex()], new Vector3(positionX, 0f, 0f), Quaternion.identity);
+
+            yield return new WaitForSeconds(_spawnDelay);
+
+            _creatingSection = false;
         }
 
         private int GetRandomIndex() => Random.Range(0, _sections.Length);

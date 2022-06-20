@@ -5,40 +5,48 @@ namespace Scripts.Utils
 {
     public class AudioComponent : MonoBehaviour
     {
-        [SerializeField] private AudioSource _mainSource;
+        [SerializeField] private AudioSource _sfxSource;
+        [SerializeField] private AudioSource _musicSource;
         [SerializeField] private Sound[] _clips;
 
-        //public AudioSource MainSource => _mainSource;
-
-        private AudioSource _audio;
         private float _sfxVolume = 0.5f;
 
         private void Awake()
         {
-            _audio = GetComponent<AudioSource>();
+            DontDestroyOnLoad(this);
         }
 
-        public void Play(string name)
+        public void PlaySfx(string name)
         {
             foreach (var clip in _clips)
             {
                 if (clip.Name == name)
                 {
-                    _audio.volume = _sfxVolume;
-                    _audio.PlayOneShot(clip.Clip);
+                    _sfxSource.volume = _sfxVolume;
+                    _sfxSource.PlayOneShot(clip.Clip);
                 }
             }
         }
 
         public void SetSfxVolume(float volume) => _sfxVolume = volume;
 
-        public void PauseMainSource() => _mainSource.Pause();
+        public void SetMusicVolume(float volume) => _musicSource.volume = volume;
 
-        public void PlayMainSource() => _mainSource.Play();
+        public void SetMusicTrack(string name)
+        {
+            foreach (var clip in _clips)
+            {
+                if (clip.Name == name)
+                {
+                    _musicSource.clip = clip.Clip;
+                    _musicSource.Play();
+                }
+            }
+        }
 
-        //public void StopMainSource() => _mainSource.Stop();
+        public void PlayMusic() => _musicSource.Play();
 
-        public void Stop() => _audio.Stop();
+        public void StopMusic() => _musicSource.Stop();
     }
 
     [Serializable]
@@ -51,74 +59,3 @@ namespace Scripts.Utils
         public AudioClip Clip => _clip;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//using System;
-//using UnityEngine;
-
-//namespace Scripts.Utils
-//{
-//    public class AudioComponent : MonoBehaviour
-//    {
-//        [SerializeField] private AudioSource _mainSource;
-//        [SerializeField] private Sound[] _clips;
-
-//        public AudioSource MainSource => _mainSource;
-
-//        private AudioSource _audio;
-
-//        private void Awake()
-//        {
-//            _audio = GetComponent<AudioSource>();
-//        }
-
-//        public void Play(string name, float volume = 0.2f)
-//        {
-//            foreach (var clip in _clips)
-//            {
-//                if (clip.Name == name)
-//                {
-//                    _audio.volume = volume;
-//                    _audio.PlayOneShot(clip.Clip);
-//                }
-//            }
-//        }
-
-//        public void PauseMainSource() => _mainSource.Pause();
-
-//        public void PlayMainSource() => _mainSource.Play();
-
-//        public void StopMainSource() => _mainSource.Stop();
-
-//        public void Stop() => _audio.Stop();
-//    }
-
-//    [Serializable]
-//    public class Sound
-//    {
-//        [SerializeField] private string _name;
-//        [SerializeField] private AudioClip _clip;
-
-//        public string Name => _name;
-//        public AudioClip Clip => _clip;
-//    }
-//}
-

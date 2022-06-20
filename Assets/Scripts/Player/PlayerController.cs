@@ -16,6 +16,7 @@ namespace Scripts.Player
         private Transform _transform;
         private GroundCheck _groundCheck;
         private GameSession _session;
+        private AudioComponent _audio;
 
         private static readonly int Run = Animator.StringToHash("is-running");
         private static readonly int Jump = Animator.StringToHash("is-jumping");
@@ -27,6 +28,7 @@ namespace Scripts.Player
             _transform = GetComponent<Transform>();
             _groundCheck = GetComponent<GroundCheck>();
             _session = FindObjectOfType<GameSession>();
+            _audio = FindObjectOfType<AudioComponent>();
         }
 
         private void Update()
@@ -34,7 +36,10 @@ namespace Scripts.Player
             _playerBody.velocity = new Vector2(horizontalMovement * _speed, _playerBody.velocity.y);
 
             if (jump && _groundCheck.IsTouchingLayer)
+            {
+                _audio.PlaySfx("jump");
                 _playerBody.velocity = new Vector2(_playerBody.velocity.x, _jumpForce);
+            }
 
             UpdateAnimation();
         }
@@ -66,7 +71,7 @@ namespace Scripts.Player
             {
                 _animator.SetTrigger(Fall);
                 gameObject.GetComponent<PlayerInput>().enabled = false;
-                _playerBody.velocity = Vector2.zero;
+                _playerBody.velocity = new Vector2(0f, _playerBody.velocity.y);
             }
         }
     }
