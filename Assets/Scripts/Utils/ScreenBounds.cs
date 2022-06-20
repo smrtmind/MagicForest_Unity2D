@@ -7,18 +7,25 @@ namespace Scripts.Utils
         public Bounds Bounds { get; private set; }
         public Bounds borderOfBounds { get; private set; }
 
+        private Camera _camera;
+        private Vector3 _screenMin;
+        private Vector3 _screenMax;
+
         private void Awake()
         {
-            var mainCamera = GetComponent<Camera>();
+            _camera = GetComponent<Camera>();
+        }
 
-            var screenMin = mainCamera.ViewportToWorldPoint(Vector3.zero);
-            var screenMax = mainCamera.ViewportToWorldPoint(new Vector3(1.3f, 1.3f, 1.3f));
+        private void Update()
+        {
+            _screenMin = _camera.ViewportToWorldPoint(Vector3.zero);
+            _screenMax = _camera.ViewportToWorldPoint(new Vector3(1.3f, 1.3f, 1.3f));
 
-            var center = mainCamera.transform.position;
-            Bounds = InitializeBounds(center, screenMin, screenMax);
+            var center = _camera.transform.position;
+            Bounds = InitializeBounds(center, _screenMin, _screenMax);
 
             var border = Vector3.one;
-            borderOfBounds = InitializeBounds(center, screenMax - border, screenMin + border);
+            borderOfBounds = InitializeBounds(center, _screenMax - border, _screenMin + border);
         }
 
         private Bounds InitializeBounds(Vector3 center, Vector3 min, Vector3 max)

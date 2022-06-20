@@ -5,20 +5,11 @@ namespace Scripts.Utils
     public class CoinSpawner : MonoBehaviour
     {
         [SerializeField] private GameObject _coin;
-        [SerializeField] private int _coinsOnStart;
         [SerializeField] private Cooldown _spawnCooldown;
 
         public Cooldown SpawnCooldown => _spawnCooldown;
 
         private Bounds _screenBounds;
-
-        private void Start()
-        {
-            _screenBounds = FindObjectOfType<ScreenBounds>().borderOfBounds;
-
-            SpawnCoins(_coinsOnStart);
-            _spawnCooldown.Reset();
-        }
 
         private void Update()
         {
@@ -29,14 +20,10 @@ namespace Scripts.Utils
             }
         }
 
-        private void SpawnCoins(int count)
-        {
-            for (int i = 0; i < count; i++)
-                SpawnNewCoin();
-        }
-
         private void SpawnNewCoin()
         {
+            _screenBounds = FindObjectOfType<ScreenBounds>().borderOfBounds;
+
             var yPosition = _screenBounds.min.y;
             var xPosition = Random.Range(_screenBounds.min.x, _screenBounds.max.x);
 

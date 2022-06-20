@@ -951,9 +951,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coin: {fileID: 3682109984302588391, guid: 80c6ac55ca3ba684fbbdef6c1b31fe54, type: 3}
-  _coinsOnStart: 5
   _spawnCooldown:
-    _value: 2
+    _value: 0.1
 --- !u!4 &1158526042
 Transform:
   m_ObjectHideFlags: 0
