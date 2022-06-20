@@ -6,13 +6,13 @@ namespace Scripts.Objects
 {
     public class CollectableComponent : MonoBehaviour
     {
-        [SerializeField] private LayerCheck _groundCheck;
         [SerializeField] private float _coinLifeSpan = 5f;
 
         private AudioComponent _audio;
         private GameSession _session;
         private Rigidbody2D _coin;
         private SpriteAnimation _spriteAnimation;
+        private GroundCheck _groundCheck;
 
         private void Awake()
         {
@@ -22,6 +22,7 @@ namespace Scripts.Objects
             _session = FindObjectOfType<GameSession>();
             _coin = GetComponent<Rigidbody2D>();
             _spriteAnimation = GetComponent<SpriteAnimation>();
+            _groundCheck = GetComponent<GroundCheck>();
         }
 
         private void Update()

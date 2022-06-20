@@ -8,13 +8,13 @@ namespace Scripts.Player
         [SerializeField] private float _speed = 5f;
         [SerializeField] private float _jumpForce = 5f;
         [SerializeField] private Animator _animator;
-        [SerializeField] private LayerCheck _groundCheck;
 
         public bool jump { get; set; }
         public float horizontalMovement { get; set; }
 
         private Rigidbody2D _playerBody;
         private Transform _transform;
+        private GroundCheck _groundCheck;
 
         private static readonly int Run = Animator.StringToHash("is-running");
         private static readonly int Jump = Animator.StringToHash("is-jumping");
@@ -24,6 +24,7 @@ namespace Scripts.Player
         {
             _playerBody = GetComponent<Rigidbody2D>();
             _transform = GetComponent<Transform>();
+            _groundCheck = GetComponent<GroundCheck>();
         }
 
         private void Update()

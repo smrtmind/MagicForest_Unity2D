@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Scripts.Utils
 {
@@ -10,21 +9,10 @@ namespace Scripts.Utils
 
         private void Awake()
         {
-            var mainCamera = FindObjectOfType<Camera>();
+            var mainCamera = GetComponent<Camera>();
 
             var screenMin = mainCamera.ViewportToWorldPoint(Vector3.zero);
-            Vector3 screenMax;
-
-            var scene = SceneManager.GetActiveScene().name;
-            if (scene == "MainMenu")
-            {
-                screenMax = mainCamera.ViewportToWorldPoint(new Vector3(1.5f, 1.5f, 1.5f));
-            }
-            else
-            {
-                screenMax = mainCamera.ViewportToWorldPoint(new Vector3(1.03f, 1.03f, 1.03f));
-            }
-
+            var screenMax = mainCamera.ViewportToWorldPoint(new Vector3(1.3f, 1.3f, 1.3f));
 
             var center = mainCamera.transform.position;
             Bounds = InitializeBounds(center, screenMin, screenMax);
