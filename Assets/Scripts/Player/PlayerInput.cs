@@ -8,13 +8,25 @@ namespace Scripts.Player
 
         private void Awake()
         {
-            _player = GetComponent<PlayerController>();
+            _player = FindObjectOfType<PlayerController>();
         }
 
         private void Update()
         {
-            _player.horizontalMovement = Input.GetAxisRaw("Horizontal");
-            _player.jump = Input.GetButtonDown("Jump");
+            //for PC build
+            //*******************************************************************
+            //_player.horizontalMovement = Input.GetAxisRaw("Horizontal");
+            //_player.jump = Input.GetButtonDown("Jump");
+            //*******************************************************************
         }
+
+        //for mobile build
+        //*******************************************************************
+        public void LeftPressed(bool state) => _player.left = state;
+
+        public void RightPressed(bool state) => _player.right = state;
+
+        public void UpPressed() => _player.up = true;
+        //*******************************************************************
     }
 }

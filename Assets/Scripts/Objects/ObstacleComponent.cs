@@ -24,6 +24,7 @@ namespace Scripts.Objects
             if (other.gameObject.tag == "Player")
             {
                 _audio.PlaySfx("hit");
+                _audio.PlaySfx("hurt");
                 _collider.isTrigger = true;
                 _session.GameIsOver();
             }

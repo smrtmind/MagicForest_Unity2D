@@ -19,15 +19,22 @@ namespace Scripts.UI
         private bool _returntoMenuPressed;
         private bool _levelLoaded = true;
         private AudioComponent _audio;
+        private PlayerController _player;
 
         private void Awake()
         {
             _session = FindObjectOfType<GameSession>();
             _pressedButtonColor = _menuButton.GetComponent<Image>().color;
-
+            _player = FindObjectOfType<PlayerController>();
             _audio = FindObjectOfType<AudioComponent>();
-            _audio.SetMusicVolume(0.2f);
+        }
+
+        private void Start()
+        {
             _audio.SetMusicTrack("level");
+
+            if (_audio.MusicSource.volume != 0f)
+                _audio.SetMusicVolume(0.2f);
         }
 
         private void Update()
@@ -50,16 +57,13 @@ namespace Scripts.UI
                 if (_loadingDelay > 0)
                     _loadingDelay -= Time.deltaTime;
                 else
-                {
-                    _audio.StopMusic();
                     SceneManager.LoadScene("MainMenu");
-                }
             }
 
             _coinsValue.text = $"{_session.Coins}";
         }
 
-        public void OnButtonPressd()
+        public void OnButtonPressed()
         {
             _audio.PlaySfx("button");
 
@@ -74,6 +78,18 @@ namespace Scripts.UI
         }
 
         public void OnMenu()
+        {
+            _audio.StopMusic();
+            ReturnToMainMenu();
+
+            var spawners = FindObjectsOfType<ObjectSpawner>();
+            foreach (var spawner in spawners)
+                spawner.gameObject.SetActive(false);
+
+            _player.StopPlayer();
+        }
+
+        public void ReturnToMainMenu()
         {
             _loadingLayoutCanvasGroup.gameObject.SetActive(true);
             _returntoMenuPressed = true;

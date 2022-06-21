@@ -10,9 +10,6 @@ namespace Scripts.Environment
         [SerializeField] private float _sectionLong = 21f;
         [SerializeField] private float _spawnDelay = 3f;
 
-        [Space(20f)]
-        [SerializeField] private GameObject _testSection;
-
         private float _xPositionRight;
         private float _xPositionLeft;
         private PlayerController _player;
@@ -24,15 +21,13 @@ namespace Scripts.Environment
 
             //spawn first section on start in the middle of the scene
             Instantiate(_sections[GetRandomIndex()], Vector3.zero, Quaternion.identity);
-
-            _testSection.SetActive(false);
         }
 
         private void Update()
         {
             if (!_creatingSection)
             {
-                if (_player.horizontalMovement < 0f)
+                if (_player.left)//_player.horizontalMovement < 0f
                 {
                     _creatingSection = true;
 
@@ -40,7 +35,7 @@ namespace Scripts.Environment
                     StartCoroutine(SpawnSection(_xPositionLeft));
                 }
 
-                if (_player.horizontalMovement > 0f)
+                if (_player.right)//_player.horizontalMovement > 0f
                 {
                     _creatingSection = true;
 

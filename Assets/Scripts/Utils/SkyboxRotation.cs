@@ -6,7 +6,7 @@ namespace Scripts.Utils
     {
         [SerializeField] private float _rotationSpeed = 1f;
 
-        private void Update()
+        private void FixedUpdate()
         {
             RenderSettings.skybox.SetFloat("_Rotation", Time.time * _rotationSpeed);
         }

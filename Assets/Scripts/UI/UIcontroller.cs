@@ -11,6 +11,8 @@ namespace Scripts.UI
         [SerializeField] private CanvasGroup _mainSettingsCanvasGroup;
         [SerializeField] private CanvasGroup _loadingLayoutCanvasGroup;
         [SerializeField] private Button[] _buttons;
+        [SerializeField] private GameObject _sfxCheckbox;
+        [SerializeField] private GameObject _musicCheckbox;
         [SerializeField] private float _menuSlideSpeed = 5f;
         [SerializeField] private float _fadeSpeed = 0.2f;
 
@@ -21,10 +23,6 @@ namespace Scripts.UI
         private GridLayoutGroup _grid;
         private Vector3 _defaultMenuPosition;
         private AudioComponent _audio;
-
-        private bool _soundIsActive = true;
-        private bool _musicIsActive = true;
-
         private bool _showMenu;
         private bool _showSettings;
         private bool _playIsPressed;
@@ -33,9 +31,7 @@ namespace Scripts.UI
         private void Awake()
         {
             _audio = FindObjectOfType<AudioComponent>();
-            _audio.SetMusicVolume(0.5f);
             _audio.SetMusicTrack("intro");
-            _audio.SetSfxVolume(0.5f);
 
             _defaultMenuPosition = transform.position;
             _grid = FindObjectOfType<GridLayoutGroup>();
@@ -49,6 +45,16 @@ namespace Scripts.UI
         private void Start()
         {
             _grid.cellSize = new Vector2(_canvasWidth, _canvasHeight);
+
+            if (_audio.SfxSource.volume > 0f)
+                _sfxCheckbox.SetActive(true);
+            else
+                _sfxCheckbox.SetActive(false);
+
+            if (_audio.MusicSource.volume > 0f)
+                _musicCheckbox.SetActive(true);
+            else
+                _musicCheckbox.SetActive(false);
         }
 
         public void OnButtonPressed(int buttonIndex)
@@ -72,35 +78,37 @@ namespace Scripts.UI
         {
             _audio.PlaySfx("button");
 
-            if (_musicIsActive)
+            if (_audio.MusicSource.volume > 0f)
             {
-                _musicIsActive = false;
-                _audio.StopMusic();
+                _audio.SetMusicVolume(0f);
+                _musicCheckbox.SetActive(false);
             }
             else
             {
-                _musicIsActive = true;
-                _audio.PlayMusic();
+                _audio.SetMusicVolume(0.2f);
+                _musicCheckbox.SetActive(true);
             }
         }
 
         public void OnSoundPressed()
         {
-            if (_soundIsActive)
+            if (_audio.SfxSource.volume > 0f)
             {
-                _soundIsActive = false;
                 _audio.SetSfxVolume(0f);
+                _sfxCheckbox.SetActive(false);
             }
             else
             {
-                _soundIsActive = true;
                 _audio.SetSfxVolume(0.5f);
                 _audio.PlaySfx("button");
+                _sfxCheckbox.SetActive(true);
             }
         }
 
         public void OnPlayPressed()
         {
+            _audio.StopMusic();
+
             _loadingLayoutCanvasGroup.gameObject.SetActive(true);
             _playIsPressed = true;
         }

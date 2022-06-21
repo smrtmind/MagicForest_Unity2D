@@ -9,28 +9,29 @@ namespace Scripts.Utils
         [SerializeField] private AudioSource _musicSource;
         [SerializeField] private Sound[] _clips;
 
-        private float _sfxVolume = 0.5f;
+        public AudioSource SfxSource => _sfxSource;
+        public AudioSource MusicSource => _musicSource;
 
         private void Awake()
         {
-            DontDestroyOnLoad(this);
+            if (GameObject.FindGameObjectsWithTag(gameObject.tag).Length > 1)
+                Destroy(gameObject);
+            else
+                DontDestroyOnLoad(this);
         }
+
+        public void SetSfxVolume(float volume) => _sfxSource.volume = volume;
+
+        public void SetMusicVolume(float volume) => _musicSource.volume = volume;
 
         public void PlaySfx(string name)
         {
             foreach (var clip in _clips)
             {
                 if (clip.Name == name)
-                {
-                    _sfxSource.volume = _sfxVolume;
                     _sfxSource.PlayOneShot(clip.Clip);
-                }
             }
         }
-
-        public void SetSfxVolume(float volume) => _sfxVolume = volume;
-
-        public void SetMusicVolume(float volume) => _musicSource.volume = volume;
 
         public void SetMusicTrack(string name)
         {
@@ -46,7 +47,10 @@ namespace Scripts.Utils
 
         public void PlayMusic() => _musicSource.Play();
 
+        public void PauseMusic() => _musicSource.Pause();
+
         public void StopMusic() => _musicSource.Stop();
+
     }
 
     [Serializable]
