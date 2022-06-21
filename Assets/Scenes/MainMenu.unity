@@ -502,7 +502,7 @@ MonoBehaviour:
   - _name: jump
     _clip: {fileID: 8300000, guid: d93ef20b819046441a3dca546778c6e3, type: 3}
   - _name: intro
-    _clip: {fileID: 8300000, guid: 662c90172dfa8b246800c1c32aaea936, type: 3}
+    _clip: {fileID: 8300000, guid: cf85eba057fa3ae47bbe2a9c01e4b2ef, type: 3}
   - _name: level
     _clip: {fileID: 8300000, guid: 44b24e816bfa00544821529ce11ec5fc, type: 3}
 --- !u!4 &394957964
@@ -1645,7 +1645,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 175970953b8e3534a87fdcb3ae84676e, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1
