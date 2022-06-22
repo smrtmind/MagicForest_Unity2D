@@ -11,6 +11,7 @@ namespace Scripts.UI
         [SerializeField] private CanvasGroup _mainSettingsCanvasGroup;
         [SerializeField] private CanvasGroup _loadingLayoutCanvasGroup;
         [SerializeField] private Button[] _buttons;
+        [SerializeField] private Button[] _checkboxes;
         [SerializeField] private GameObject _sfxCheckbox;
         [SerializeField] private GameObject _musicCheckbox;
         [SerializeField] private float _menuSlideSpeed = 5f;
@@ -46,15 +47,8 @@ namespace Scripts.UI
         {
             _grid.cellSize = new Vector2(_canvasWidth, _canvasHeight);
 
-            if (_audio.SfxSource.volume > 0f)
-                _sfxCheckbox.SetActive(true);
-            else
-                _sfxCheckbox.SetActive(false);
-
-            if (_audio.MusicSource.volume > 0f)
-                _musicCheckbox.SetActive(true);
-            else
-                _musicCheckbox.SetActive(false);
+            _sfxCheckbox.SetActive(_audio.SfxSource.volume > 0f ? true : false);
+            _musicCheckbox.SetActive(_audio.MusicSource.volume > 0f ? true : false);
         }
 
         public void OnButtonPressed(int buttonIndex)
@@ -117,6 +111,9 @@ namespace Scripts.UI
         {
             foreach (var button in _buttons)
                 button.GetComponent<EventTrigger>().enabled = state;
+
+            foreach (var box in _checkboxes)
+                box.GetComponent<EventTrigger>().enabled = state;
         }
 
         public void ShowMenu() => _showMenu = true;

@@ -196,5 +196,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isTouchingLayer: 0
-  _beamLength: 1
+  _beamLength: 1.2
   _color: {r: 1, g: 0, b: 0, a: 1}
