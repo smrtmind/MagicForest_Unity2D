@@ -12,14 +12,6 @@ namespace Scripts.Utils
         public AudioSource SfxSource => _sfxSource;
         public AudioSource MusicSource => _musicSource;
 
-        private void Awake()
-        {
-            if (GameObject.FindGameObjectsWithTag(gameObject.tag).Length > 1)
-                Destroy(gameObject);
-            else
-                DontDestroyOnLoad(this);
-        }
-
         public void SetSfxVolume(float volume) => _sfxSource.volume = volume;
 
         public void SetMusicVolume(float volume) => _musicSource.volume = volume;

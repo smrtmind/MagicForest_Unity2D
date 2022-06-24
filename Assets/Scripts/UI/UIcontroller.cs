@@ -8,6 +8,7 @@ namespace Scripts.UI
 {
     public class UiController : MonoBehaviour
     {
+        [SerializeField] private GameObject _networkError;
         [SerializeField] private CanvasGroup _mainSettingsCanvasGroup;
         [SerializeField] private CanvasGroup _loadingLayoutCanvasGroup;
         [SerializeField] private Button[] _buttons;
@@ -27,7 +28,9 @@ namespace Scripts.UI
         private bool _showMenu;
         private bool _showSettings;
         private bool _playIsPressed;
+        private float _errorMessageDelay = 2f;
         private float _loadingDelay = 3f;
+        private LoadAssetBundles _bundlesLoader;
 
         private void Awake()
         {
@@ -41,6 +44,7 @@ namespace Scripts.UI
             _canvasHeight = _canvasScaler.referenceResolution.y;
 
             _pressedButtonColor = _buttons[0].transform.Find("Text").GetComponent<Text>().color;
+            _bundlesLoader = FindObjectOfType<LoadAssetBundles>();
         }
 
         private void Start()
@@ -101,10 +105,18 @@ namespace Scripts.UI
 
         public void OnPlayPressed()
         {
-            _audio.StopMusic();
+            if (Application.internetReachability == NetworkReachability.NotReachable)
+            {
+                _networkError.SetActive(true);
+            }
+            else
+            {
+                _audio.StopMusic();
+                _loadingLayoutCanvasGroup.gameObject.SetActive(true);
 
-            _loadingLayoutCanvasGroup.gameObject.SetActive(true);
-            _playIsPressed = true;
+                _playIsPressed = true;
+                _bundlesLoader.DownloadAssetBundles();
+            }
         }
 
         public void ButtonsIsActive(bool state)
@@ -124,6 +136,17 @@ namespace Scripts.UI
 
         private void Update()
         {
+            if (_networkError.activeSelf)
+            {
+                if (_errorMessageDelay > 0f)
+                    _errorMessageDelay -= Time.deltaTime;
+                else
+                {
+                    _networkError.SetActive(false);
+                    _errorMessageDelay = 2f;
+                }
+            }
+
             if (_playIsPressed)
             {
                 _mainSettingsCanvasGroup.alpha -= _fadeSpeed * Time.deltaTime;
@@ -135,7 +158,12 @@ namespace Scripts.UI
                 if (_loadingDelay > 0)
                     _loadingDelay -= Time.deltaTime;
                 else
-                    SceneManager.LoadScene("EndlessLevel");
+                {
+                    if (_bundlesLoader.DownloadComplete)
+                        SceneManager.LoadScene("EndlessLevel");
+                    else
+                        _loadingDelay += 1f;
+                }
             }
 
             if (_showSettings)

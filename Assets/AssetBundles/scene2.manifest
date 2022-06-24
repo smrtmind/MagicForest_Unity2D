@@ -1,0 +1,183 @@
+ManifestFileVersion: 0
+CRC: 1145891956
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 08237b2b5ed7702d1aabaf3b8bf52369
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 7a2232acab7c39f888f1730978e7adb9
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 58
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 62
+  Script: {instanceID: 0}
+- Class: 70
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 81
+  Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 108
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 57c008f954fe54a8bb972de1018a2cb8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fdf06ec270129c740b19d58fe1f02da2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8cf775590bcbaa9428c434e401f31e6e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7a3c067e17571694bbfd22bc63fef54c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3b399e07c31f97943b42a6e23d230549, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2f8fb299bb4cf534b857906afae67871, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6df51e905f0dfca4a92c0932c8558766, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1c79d28038a30b54aa38a34d8e7be4e9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cbbe00ce83c93674d8b2b5e61208f3f3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b89b8dfb221ecd944bad47e75ec29460, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5dfa71cbec0ebef4dace8708e690f88c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b89154e45a30cb04ebce448fd4286052, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1992302c0f77e2b4c80a7ff418c706ec, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 52bb728b2bd24ed4a8f748e5a84d00e7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e70059deddd772d4f936d853417768a5, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+- Class: 225
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: Scripts.Objects.AnimationClip
+- AssemblyName: Assembly-CSharp
+  ClassName: Scripts.Utils.Cooldown
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.ArgumentCache
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentListenerMode
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.UnityEvent
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.UnityEvent`1[System.String]
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.EventSystems.EventTrigger/Entry
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.EventSystems.EventTrigger/TriggerEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.AnimationTriggers
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Button/ButtonClickedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ColorBlock
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.FontData
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Navigation
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.SpriteState
+Assets:
+- Assets/scene2/Level/Section8.prefab
+- Assets/scene2/Objects/Stone1.prefab
+- Assets/scene2/Player/Animations/run.anim
+- Assets/scene2/Player/Animations/_girl.controller
+- Assets/scene2/Textures/Background/frontLayer.png
+- Assets/scene2/Textures/Background/backLayer.png
+- Assets/scene2/Materials/slippery.physicsMaterial2D
+- Assets/scene2/Player/Animations/lookUp.anim
+- Assets/scene2/Level/Section9.prefab
+- Assets/scene2/Player/Animations/hurt.anim
+- Assets/scene2/Level/Section4.prefab
+- Assets/scene2/Player/Sprites/Circle.png
+- Assets/scene2/Textures/coin.png
+- Assets/scene2/Level/Section2.prefab
+- Assets/scene2/Level/Section0.prefab
+- Assets/scene2/Player/Sprites/Kindergartner illust transparent.png
+- Assets/scene2/Player/Sprites/Skeletal.psb
+- Assets/scene2/Level/Section6.prefab
+- Assets/scene2/Materials/SpriteDiffuse.mat
+- Assets/scene2/Player/Animations/fallOnGround.anim
+- Assets/scene2/Player/Animations/_defaultAnimator.controller
+- Assets/scene2/Player/Animations/idle.anim
+- Assets/scene2/Objects/Stone2.prefab
+- Assets/scene2/Player/Girl.prefab
+- Assets/scene2/UI/controlButtons.png
+- Assets/scene2/Textures/stones.png
+- Assets/scene2/Textures/platform.png
+- Assets/scene2/scene2.prefab
+- Assets/scene2/Player/Player.prefab
+- Assets/scene2/Player/Animations/attack.anim
+- Assets/scene2/Player/Animations/die.anim
+- Assets/scene2/Level/Section5.prefab
+- Assets/scene2/Level/Section1.prefab
+- Assets/scene2/Textures/Background/middleLayer.png
+- Assets/scene2/Level/Section3.prefab
+- Assets/scene2/Player/Animations/jump.anim
+- Assets/scene2/Prefabs/Hud.prefab
+- Assets/scene2/Player/Sprites/Kindergartner illust.png
+- Assets/scene2/Objects/Stone0.prefab
+- Assets/scene2/Objects/Coin.prefab
+- Assets/scene2/Level/Section7.prefab
+Dependencies: []
