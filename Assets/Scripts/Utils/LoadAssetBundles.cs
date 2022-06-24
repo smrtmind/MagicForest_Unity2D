@@ -1,3 +1,4 @@
+using Scripts.UI;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -9,8 +10,9 @@ namespace Scripts.Utils
         [SerializeField] private string _bundleUrl;
         [SerializeField] private string _assetToLoadName;
         [SerializeField] private uint _version = 0;
-        
+
         private GameManager _gameManager;
+        private UiController _ui;
 
         private bool _downloadComplete;
         public bool DownloadComplete => _downloadComplete;
@@ -18,6 +20,7 @@ namespace Scripts.Utils
         private void Awake()
         {
             _gameManager = FindObjectOfType<GameManager>();
+            _ui = FindObjectOfType<UiController>();
         }
 
         public void DownloadAssetBundles() => StartCoroutine(DownloadAndCache());
@@ -33,7 +36,7 @@ namespace Scripts.Utils
 
                 if (www.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.Log(www.error);
+                    _ui.LoadingInterrupt();
                 }
                 else
                 {

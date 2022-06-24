@@ -2506,6 +2506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _networkError: {fileID: 1493513583}
+  _networkMessage: {fileID: 1854652237}
   _mainSettingsCanvasGroup: {fileID: 4178485031694713350}
   _loadingLayoutCanvasGroup: {fileID: 4178485030401766617}
   _buttons:

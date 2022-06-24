@@ -9,6 +9,7 @@ namespace Scripts.UI
     public class UiController : MonoBehaviour
     {
         [SerializeField] private GameObject _networkError;
+        [SerializeField] private Text _networkMessage;
         [SerializeField] private CanvasGroup _mainSettingsCanvasGroup;
         [SerializeField] private CanvasGroup _loadingLayoutCanvasGroup;
         [SerializeField] private Button[] _buttons;
@@ -19,7 +20,7 @@ namespace Scripts.UI
         [SerializeField] private float _fadeSpeed = 0.2f;
 
         private Color _pressedButtonColor;
-        private CanvasScaler _canvasScaler;
+        private RectTransform _canvasRect;
         private float _canvasWidth;
         private float _canvasHeight;
         private GridLayoutGroup _grid;
@@ -39,9 +40,9 @@ namespace Scripts.UI
 
             _defaultMenuPosition = transform.position;
             _grid = FindObjectOfType<GridLayoutGroup>();
-            _canvasScaler = FindObjectOfType<Canvas>().GetComponent<CanvasScaler>();
-            _canvasWidth = _canvasScaler.referenceResolution.x;
-            _canvasHeight = _canvasScaler.referenceResolution.y;
+            _canvasRect = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
+            _canvasWidth = _canvasRect.rect.width;
+            _canvasHeight = _canvasRect.rect.height;
 
             _pressedButtonColor = _buttons[0].transform.Find("Text").GetComponent<Text>().color;
             _bundlesLoader = FindObjectOfType<LoadAssetBundles>();
@@ -107,6 +108,7 @@ namespace Scripts.UI
         {
             if (Application.internetReachability == NetworkReachability.NotReachable)
             {
+                _networkMessage.text = "CHECK  INTERNET  CONNECTION";
                 _networkError.SetActive(true);
             }
             else
@@ -188,6 +190,17 @@ namespace Scripts.UI
 
                 gameObject.transform.position = new Vector3(transform.position.x + _menuSlideSpeed, transform.position.y);
             }
+        }
+
+        public void LoadingInterrupt()
+        {
+            _networkMessage.text = "SOMETHING  WENT  WRONG";
+            _networkError.SetActive(true);
+
+            _audio.PlayMusic();
+            _loadingLayoutCanvasGroup.gameObject.SetActive(false);
+
+            _playIsPressed = false;
         }
     }
 }

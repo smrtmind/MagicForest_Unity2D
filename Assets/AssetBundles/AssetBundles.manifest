@@ -1,7 +1,7 @@
 ManifestFileVersion: 0
-CRC: 836582935
+CRC: 3194378714
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: scene2
+      Name: scene2mobile
       Dependencies: {}

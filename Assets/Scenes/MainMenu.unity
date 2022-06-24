@@ -622,7 +622,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 2280, y: 1080}
+  m_ReferenceResolution: {x: 0, y: 0}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -780,7 +780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a414b30e5e7c684199a950e639737c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bundleUrl: https://drive.google.com/uc?export=download&id=1ch-vbVRbvnTTSDLe-alFuWGp6BRpeDAF
+  _bundleUrl: https://drive.google.com/uc?export=download&id=1HY_yi3FdaBElwQ311e0tYdDt_8wbDWQQ
   _assetToLoadName: scene2
   _version: 0
 --- !u!1001 &4178485031538506523
