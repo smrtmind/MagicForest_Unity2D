@@ -22,11 +22,11 @@ namespace Scripts.Player
 
         //for mobile build
         //*******************************************************************
-        public void LeftPressed(bool state) => _player.left = state;
+        public void LeftPressed(bool state) => _player.leftPressed = state;
 
-        public void RightPressed(bool state) => _player.right = state;
+        public void RightPressed(bool state) => _player.rightPressed = state;
 
-        public void UpPressed() => _player.up = true;
+        public void JumpPressed() => _player.jumpPressed = true;
         //*******************************************************************
     }
 }

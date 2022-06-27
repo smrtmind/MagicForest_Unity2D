@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 4767f014ccdb3c14abaf026ba1cd685d
+guid: a71f3958fec4ab341809f5be8bba0ae3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5171221398253030913
-    second: stones_0
+      213: 8910970099355002407
+    second: controlButtons_0
   - first:
-      213: -5265537426725716387
-    second: stones_1
+      213: 2769310298302680926
+    second: controlButtons_1
   - first:
-      213: -1842656057284236593
-    second: stones_2
+      213: -8387309707346414670
+    second: controlButtons_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -112,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: stones_0
+      name: controlButtons_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 516.6667
-        height: 350
+        width: 254
+        height: 254
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -126,20 +126,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10e45c1a67ed3c740800000000000000
-      internalID: 5171221398253030913
+      spriteID: 726ae20d7102aab70800000000000000
+      internalID: 8910970099355002407
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stones_1
+      name: controlButtons_1
       rect:
         serializedVersion: 2
-        x: 516
+        x: 254
         y: 0
-        width: 516.6667
-        height: 350
+        width: 254
+        height: 254
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5e3d70cb9d0de6b0800000000000000
-      internalID: -5265537426725716387
+      spriteID: e5f892b3b019e6620800000000000000
+      internalID: 2769310298302680926
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stones_2
+      name: controlButtons_2
       rect:
         serializedVersion: 2
-        x: 1032
+        x: 508
         y: 0
-        width: 516.6667
-        height: 350
+        width: 254
+        height: 254
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,8 +168,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fcae95624129d66e0800000000000000
-      internalID: -1842656057284236593
+      spriteID: 2b37e60524a4a9b80800000000000000
+      internalID: -8387309707346414670
       vertices: []
       indices: 
       edges: []

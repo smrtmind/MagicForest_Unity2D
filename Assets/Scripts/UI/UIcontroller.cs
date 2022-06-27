@@ -19,37 +19,36 @@ namespace Scripts.UI
         [SerializeField] private float _menuSlideSpeed = 5f;
         [SerializeField] private float _fadeSpeed = 0.2f;
 
-        private Color _pressedButtonColor;
         private RectTransform _canvasRect;
+        private GridLayoutGroup _grid;
+        private AudioComponent _audio;
+        private LoadAssetBundles _bundlesLoader;
+        private Color _pressedButtonColor;
+        private Vector3 _defaultMenuPosition;
         private float _canvasWidth;
         private float _canvasHeight;
-        private GridLayoutGroup _grid;
-        private Vector3 _defaultMenuPosition;
-        private AudioComponent _audio;
         private bool _showMenu;
         private bool _showSettings;
         private bool _playIsPressed;
         private float _errorMessageDelay = 2f;
         private float _loadingDelay = 3f;
-        private LoadAssetBundles _bundlesLoader;
 
         private void Awake()
         {
             _audio = FindObjectOfType<AudioComponent>();
             _audio.SetMusicTrack("intro");
-
-            _defaultMenuPosition = transform.position;
             _grid = FindObjectOfType<GridLayoutGroup>();
             _canvasRect = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
-            _canvasWidth = _canvasRect.rect.width;
-            _canvasHeight = _canvasRect.rect.height;
-
             _pressedButtonColor = _buttons[0].transform.Find("Text").GetComponent<Text>().color;
             _bundlesLoader = FindObjectOfType<LoadAssetBundles>();
         }
 
         private void Start()
         {
+            _defaultMenuPosition = transform.position;
+            _canvasWidth = _canvasRect.rect.width;
+            _canvasHeight = _canvasRect.rect.height;
+
             _grid.cellSize = new Vector2(_canvasWidth, _canvasHeight);
 
             _sfxCheckbox.SetActive(_audio.SfxSource.volume > 0f ? true : false);

@@ -40,9 +40,11 @@ namespace Scripts.Utils
                 }
                 else
                 {
-                    // Get downloaded asset bundle
+                    //get downloaded asset bundle
                     var remoteBundle = DownloadHandlerAssetBundle.GetContent(www);
                     _gameManager.Bundle = (GameObject)remoteBundle.LoadAsset(_assetToLoadName);
+
+                    //clear cache
                     remoteBundle.Unload(false);
 
                     _downloadComplete = true;

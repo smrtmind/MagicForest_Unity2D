@@ -12,15 +12,15 @@ namespace Scripts.Player
 
         //for PC build
         //*******************************************************************
-        public bool jump { get; set; }
-        public float horizontalMovement { get; set; }
+        //public bool jump { get; set; }
+        //public float horizontalMovement { get; set; }
         //*******************************************************************
 
         //for mobile build
         //*******************************************************************
-        public bool left { get; set; }
-        public bool right { get; set; }
-        public bool up { get; set; }
+        public bool leftPressed { get; set; }
+        public bool rightPressed { get; set; }
+        public bool jumpPressed { get; set; }
         //*******************************************************************
 
         private Rigidbody2D _playerBody;
@@ -61,18 +61,19 @@ namespace Scripts.Player
 
             //for mobile build
             //*******************************************************************
-            if (left)
+            if (leftPressed)
                 _playerBody.velocity = new Vector2(-1f * _speed, _playerBody.velocity.y);
-            else if (right)
+            else if (rightPressed)
                 _playerBody.velocity = new Vector2(1f * _speed, _playerBody.velocity.y);
             else
                 _playerBody.velocity = new Vector2(0f, _playerBody.velocity.y);
 
-            if (up && _groundCheck.IsTouchingLayer)
+            if (jumpPressed && _groundCheck.IsTouchingLayer)
             {
                 _audio.PlaySfx("jump");
                 _playerBody.velocity = new Vector2(_playerBody.velocity.x, _jumpForce);
-                up = false;
+
+                jumpPressed = false;
             }
             //*******************************************************************
 
@@ -81,13 +82,12 @@ namespace Scripts.Player
 
         private void UpdateAnimation()
         {
-            if (left)//horizontalMovement < 0f
+            if (leftPressed)//horizontalMovement < 0f (for PC build)
             {
                 _transform.rotation = Quaternion.Euler(transform.rotation.x, 180f, transform.rotation.z);
                 _animator.SetBool(Run, true);
             }
-
-            else if (right)//horizontalMovement > 0f
+            else if (rightPressed)//horizontalMovement > 0f (for PC build)
             {
                 _transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, transform.rotation.z);
                 _animator.SetBool(Run, true);
@@ -97,10 +97,8 @@ namespace Scripts.Player
                 _animator.SetBool(Run, false);
             }
 
-            if (_playerBody.velocity.y != 0f)
-                _animator.SetBool(Jump, true);
-            else
-                _animator.SetBool(Jump, false);
+            var positionY = _playerBody.velocity.y != 0f ? true : false;
+            _animator.SetBool(Jump, positionY);
 
             if (_session.GameOver)
             {
@@ -113,6 +111,7 @@ namespace Scripts.Player
 
         public void StopPlayer()
         {
+            //block player control buttons
             _input.enabled = false;
             _playerBody.velocity = new Vector2(0f, _playerBody.velocity.y);
         }

@@ -10,16 +10,19 @@ namespace Scripts.Environment
         [SerializeField] private float _sectionLong = 21f;
         [SerializeField] private float _spawnDelay = 3f;
 
+        private PlayerController _player;
         private float _xPositionRight;
         private float _xPositionLeft;
-        private PlayerController _player;
         private bool _creatingSection = false;
 
         private void Awake()
         {
             _player = FindObjectOfType<PlayerController>();
+        }
 
-            //spawn first section on start in the middle of the scene
+        private void Start()
+        {
+            //spawn first random section on start in the middle of the scene, to make every start of game unique
             Instantiate(_sections[GetRandomIndex()], Vector3.zero, Quaternion.identity);
         }
 
@@ -27,7 +30,8 @@ namespace Scripts.Environment
         {
             if (!_creatingSection)
             {
-                if (_player.left)//_player.horizontalMovement < 0f
+                //create new sections if player moves left
+                if (_player.leftPressed)//_player.horizontalMovement < 0f (for PC build)
                 {
                     _creatingSection = true;
 
@@ -35,7 +39,8 @@ namespace Scripts.Environment
                     StartCoroutine(SpawnSection(_xPositionLeft));
                 }
 
-                if (_player.right)//_player.horizontalMovement > 0f
+                //create new sections if player moves right
+                if (_player.rightPressed)//_player.horizontalMovement > 0f (for PC build)
                 {
                     _creatingSection = true;
 
@@ -47,6 +52,7 @@ namespace Scripts.Environment
 
         private IEnumerator SpawnSection(float positionX)
         {
+            //choose random section from the array of ready sections
             Instantiate(_sections[GetRandomIndex()], new Vector3(positionX, 0f, 0f), Quaternion.identity);
 
             yield return new WaitForSeconds(_spawnDelay);

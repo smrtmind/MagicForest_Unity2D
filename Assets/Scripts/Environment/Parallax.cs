@@ -13,8 +13,12 @@ namespace Scripts.Environment
         private void Awake()
         {
             _camera = FindObjectOfType<Camera>();
-            _startPosition = transform.position.x;
             _length = GetComponent<SpriteRenderer>().bounds.size.x;
+        }
+
+        private void Start()
+        {
+            _startPosition = transform.position.x;
         }
 
         private void FixedUpdate()

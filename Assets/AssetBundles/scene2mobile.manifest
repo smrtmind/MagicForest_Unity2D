@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2163766494
+CRC: 3948219369
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 90990896dff0c459806650ff516886dc
+    Hash: 73472fa5afb496b2a895c27b063caae0
   TypeTreeHash:
     serializedVersion: 2
     Hash: 7a2232acab7c39f888f1730978e7adb9
@@ -141,45 +141,42 @@ SerializeReferenceClassIdentifiers:
 Assets:
 - Assets/Scene2Resources/Prefabs/Level/Section8.prefab
 - Assets/Scene2Resources/Prefabs/Objects/Stone1.prefab
+- Assets/Scene2Resources/Prefabs/Player/Animations/Run.anim
 - Assets/Scene2Resources/Prefabs/Player/Animations/_girl.controller
-- Assets/Scene2Resources/Textures/Background/backLayer.png
-- Assets/Scene2Resources/Textures/coin.png
-- Assets/Scene2Resources/UI/CoinHud/_coin.controller
-- Assets/Scene2Resources/Prefabs/Level/Section2.prefab
-- Assets/Scene2Resources/Prefabs/Player/Sprites/Circle.png
-- Assets/Scene2Resources/Prefabs/Level/Section6.prefab
-- Assets/Scene2Resources/Prefabs/Player/Animations/_defaultAnimator.controller
-- Assets/Scene2Resources/Prefabs/Player/Sprites/Kindergartner illust.png
-- Assets/Scene2Resources/Prefabs/Player/Girl.prefab
-- Assets/Scene2Resources/Prefabs/Player/Player.prefab
-- Assets/Scene2Resources/Prefabs/Player/Animations/die.anim
-- Assets/Scene2Resources/Textures/Background/middleLayer.png
-- Assets/Scene2Resources/Prefabs/Player/Animations/jump.anim
-- Assets/Scene2Resources/Prefabs/Level/Section7.prefab
-- Assets/Scene2Resources/UI/CoinHud/idle.anim
-- Assets/Scene2Resources/Prefabs/Player/Animations/run.anim
-- Assets/Scene2Resources/Textures/Background/frontLayer.png
+- Assets/Scene2Resources/Textures/Level/frontLayer.png
+- Assets/Scene2Resources/Textures/Level/backLayer.png
 - Assets/Scene2Resources/Materials/slippery.physicsMaterial2D
-- Assets/Scene2Resources/Prefabs/Player/Animations/lookUp.anim
+- Assets/Scene2Resources/Prefabs/Objects/Coin/Animation/idle.anim
+- Assets/Scene2Resources/Prefabs/Player/Animations/LookUp.anim
 - Assets/Scene2Resources/Prefabs/Level/Section9.prefab
-- Assets/Scene2Resources/Prefabs/Player/Animations/hurt.anim
+- Assets/Scene2Resources/Prefabs/Player/Animations/Hurt.anim
 - Assets/Scene2Resources/Prefabs/Level/Section4.prefab
 - Assets/Scene2Resources/Prefabs/Level/Section0.prefab
-- Assets/Scene2Resources/Prefabs/Player/Sprites/Kindergartner illust transparent.png
-- Assets/Scene2Resources/Prefabs/Player/Sprites/Skeletal.psb
-- Assets/Scene2Resources/scene2.prefab
+- Assets/Scene2Resources/Textures/coin.png
+- Assets/Scene2Resources/Prefabs/Level/Section2.prefab
+- Assets/Scene2Resources/Prefabs/Player/Skeletal/Skeletal.psb
+- Assets/Scene2Resources/Prefabs/Level/Section6.prefab
+- Assets/Scene2Resources/Prefabs/Player/Animations/TripOver.anim
 - Assets/Scene2Resources/Materials/SpriteDiffuse.mat
+- Assets/Scene2Resources/scene2.prefab
 - Assets/Scene2Resources/Prefabs/Player/Animations/fallOnGround.anim
-- Assets/Scene2Resources/Prefabs/Player/Animations/idle.anim
+- Assets/Scene2Resources/Prefabs/Player/Animations/Idle.anim
 - Assets/Scene2Resources/Prefabs/Objects/Stone2.prefab
-- Assets/Scene2Resources/UI/controlButtons.png
+- Assets/Scene2Resources/Prefabs/Player/Girl.prefab
+- Assets/Scene2Resources/Prefabs/Objects/Coin/Animation/_coin.controller
+- Assets/Scene2Resources/Textures/controlButtons.png
 - Assets/Scene2Resources/Textures/stones.png
-- Assets/Scene2Resources/Textures/platform.png
-- Assets/Scene2Resources/Prefabs/Player/Animations/attack.anim
-- Assets/Scene2Resources/Prefabs/Level/Section1.prefab
+- Assets/Scene2Resources/Textures/Level/platform.png
+- Assets/Scene2Resources/Prefabs/Player/Animations/Attack.anim
+- Assets/Scene2Resources/Prefabs/Player/Player.prefab
+- Assets/Scene2Resources/Prefabs/Player/Animations/Die.anim
 - Assets/Scene2Resources/Prefabs/Level/Section5.prefab
+- Assets/Scene2Resources/Prefabs/Level/Section1.prefab
+- Assets/Scene2Resources/Textures/Level/middleLayer.png
 - Assets/Scene2Resources/Prefabs/Level/Section3.prefab
+- Assets/Scene2Resources/Prefabs/Player/Animations/Jump.anim
 - Assets/Scene2Resources/Prefabs/UI/Hud.prefab
 - Assets/Scene2Resources/Prefabs/Objects/Stone0.prefab
-- Assets/Scene2Resources/Prefabs/Objects/Coin.prefab
+- Assets/Scene2Resources/Prefabs/Objects/Coin/Coin.prefab
+- Assets/Scene2Resources/Prefabs/Level/Section7.prefab
 Dependencies: []

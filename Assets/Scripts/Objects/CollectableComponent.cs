@@ -16,6 +16,7 @@ namespace Scripts.Objects
 
         private void Awake()
         {
+            //assign the life cycle of an object on start
             Destroy(gameObject, _coinLifeSpan);
 
             _audio = FindObjectOfType<AudioComponent>();
@@ -29,6 +30,7 @@ namespace Scripts.Objects
         {
             if (_groundCheck.IsTouchingLayer)
             {
+                //prevent coin of touching the ground
                 _coin.bodyType = RigidbodyType2D.Static;
                 _spriteAnimation.enabled = true;
             }

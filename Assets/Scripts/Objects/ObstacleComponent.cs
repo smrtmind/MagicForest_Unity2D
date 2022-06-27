@@ -12,6 +12,7 @@ namespace Scripts.Objects
 
         private void Awake()
         {
+            //assign the life cycle of an object on start
             Destroy(gameObject, 10f);
 
             _session = FindObjectOfType<GameSession>();
