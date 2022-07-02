@@ -183,6 +183,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coinLifeSpan: 5
+  _coin: {fileID: 3682109984302588389}
+  _spriteAnimation: {fileID: 3682109984302588388}
+  _groundCheck: {fileID: 852373064}
 --- !u!114 &852373064
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -263,7 +263,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 5539826720445189957}
           m_TargetAssemblyTypeName: Scripts.UI.HudController, Assembly-CSharp
-          m_MethodName: OnButtonPressed
+          m_MethodName: OnButtonReleased
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

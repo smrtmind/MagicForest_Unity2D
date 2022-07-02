@@ -13,7 +13,6 @@ namespace Scripts.UI
         [SerializeField] private CanvasGroup _mainSettingsCanvasGroup;
         [SerializeField] private CanvasGroup _loadingLayoutCanvasGroup;
         [SerializeField] private Button[] _buttons;
-        [SerializeField] private Button[] _checkboxes;
         [SerializeField] private GameObject _sfxCheckbox;
         [SerializeField] private GameObject _musicCheckbox;
         [SerializeField] private float _menuSlideSpeed = 5f;
@@ -30,6 +29,7 @@ namespace Scripts.UI
         private bool _showMenu;
         private bool _showSettings;
         private bool _playIsPressed;
+        private int _buttonIndex;
         private float _errorMessageDelay = 2f;
         private float _loadingDelay = 3f;
 
@@ -54,86 +54,6 @@ namespace Scripts.UI
             _sfxCheckbox.SetActive(_audio.SfxSource.volume > 0f ? true : false);
             _musicCheckbox.SetActive(_audio.MusicSource.volume > 0f ? true : false);
         }
-
-        public void OnButtonPressed(int buttonIndex)
-        {
-            _audio.PlaySfx("button");
-
-            _buttons[buttonIndex].GetComponent<Image>().color = _pressedButtonColor;
-            _buttons[buttonIndex].transform.Find("Text").GetComponent<Text>().color = Color.white;
-        }
-
-        public void OnButtonReleased()
-        {
-            foreach (var button in _buttons)
-            {
-                button.GetComponent<Image>().color = Color.white;
-                button.transform.Find("Text").GetComponent<Text>().color = _pressedButtonColor;
-            }
-        }
-
-        public void OnMusicPressed()
-        {
-            _audio.PlaySfx("button");
-
-            if (_audio.MusicSource.volume > 0f)
-            {
-                _audio.SetMusicVolume(0f);
-                _musicCheckbox.SetActive(false);
-            }
-            else
-            {
-                _audio.SetMusicVolume(0.2f);
-                _musicCheckbox.SetActive(true);
-            }
-        }
-
-        public void OnSoundPressed()
-        {
-            if (_audio.SfxSource.volume > 0f)
-            {
-                _audio.SetSfxVolume(0f);
-                _sfxCheckbox.SetActive(false);
-            }
-            else
-            {
-                _audio.SetSfxVolume(0.5f);
-                _audio.PlaySfx("button");
-                _sfxCheckbox.SetActive(true);
-            }
-        }
-
-        public void OnPlayPressed()
-        {
-            if (Application.internetReachability == NetworkReachability.NotReachable)
-            {
-                _networkMessage.text = "CHECK  INTERNET  CONNECTION";
-                _networkError.SetActive(true);
-            }
-            else
-            {
-                _audio.StopMusic();
-                _loadingLayoutCanvasGroup.gameObject.SetActive(true);
-
-                _playIsPressed = true;
-                _bundlesLoader.DownloadAssetBundles();
-            }
-        }
-
-        public void ButtonsIsActive(bool state)
-        {
-            foreach (var button in _buttons)
-                button.GetComponent<EventTrigger>().enabled = state;
-
-            foreach (var box in _checkboxes)
-                box.GetComponent<EventTrigger>().enabled = state;
-        }
-
-        public void ShowMenu() => _showMenu = true;
-
-        public void ShowSettings() => _showSettings = true;
-
-        public void OnExit() => Application.Quit();
 
         private void Update()
         {
@@ -191,6 +111,79 @@ namespace Scripts.UI
             }
         }
 
+        public void OnButtonPressed(int buttonIndex)
+        {
+            _buttonIndex = buttonIndex;
+
+            _audio.PlaySfx("button");
+            ChangeButtonColor(_pressedButtonColor, Color.white);
+        }
+
+        public void OnButtonReleased()
+        {
+            ChangeButtonColor(Color.white, _pressedButtonColor);
+        }
+
+        public void OnMusicPressed()
+        {
+            _audio.PlaySfx("button");
+
+            if (_audio.MusicSource.volume > 0f)
+            {
+                _audio.SetMusicVolume(0f);
+                _musicCheckbox.SetActive(false);
+            }
+            else
+            {
+                _audio.SetMusicVolume(0.2f);
+                _musicCheckbox.SetActive(true);
+            }
+        }
+
+        public void OnSoundPressed()
+        {
+            if (_audio.SfxSource.volume > 0f)
+            {
+                _audio.SetSfxVolume(0f);
+                _sfxCheckbox.SetActive(false);
+            }
+            else
+            {
+                _audio.SetSfxVolume(0.5f);
+                _audio.PlaySfx("button");
+                _sfxCheckbox.SetActive(true);
+            }
+        }
+
+        public void OnPlayPressed()
+        {
+            if (Application.internetReachability == NetworkReachability.NotReachable)
+            {
+                _networkMessage.text = "CHECK  INTERNET  CONNECTION";
+                _networkError.SetActive(true);
+            }
+            else
+            {
+                _audio.StopMusic();
+                _loadingLayoutCanvasGroup.gameObject.SetActive(true);
+
+                _playIsPressed = true;
+                _bundlesLoader.DownloadAssetBundles();
+            }
+        }
+
+        public void ButtonsIsActive(bool state)
+        {
+            foreach (var button in _buttons)
+                button.GetComponent<EventTrigger>().enabled = state;
+        }
+
+        public void ShowMenu() => _showMenu = true;
+
+        public void ShowSettings() => _showSettings = true;
+
+        public void OnExit() => Application.Quit();
+
         public void LoadingInterrupt()
         {
             _networkMessage.text = "SOMETHING  WENT  WRONG";
@@ -200,6 +193,12 @@ namespace Scripts.UI
             _loadingLayoutCanvasGroup.gameObject.SetActive(false);
 
             _playIsPressed = false;
+        }
+
+        private void ChangeButtonColor(Color buttonColor, Color buttonTextColor)
+        {
+            _buttons[_buttonIndex].GetComponent<Image>().color = buttonColor;
+            _buttons[_buttonIndex].transform.Find("Text").GetComponent<Text>().color = buttonTextColor;
         }
     }
 }
